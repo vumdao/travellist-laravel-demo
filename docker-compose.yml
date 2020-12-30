@@ -1,0 +1,93 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: www-data
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: travellist
+    container_name: travellist-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      - composer_cache:/home/.sammy/.composer
+    networks:
+      - travellist
+    environment:
+      APP_ENV: local
+      CONTAINER_ROLE: app
+
+  scheduler:
+    image: travellist
+    container_name: travellist-scheduler
+    depends_on:
+      - app    
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+      - composer_cache:/home/.sammy/.composer
+    networks:
+      - travellist
+    environment:
+      APP_ENV: local
+      CONTAINER_ROLE: scheduler
+
+  queue:
+    image: travellist
+    container_name: travellist-queue
+    depends_on:
+      - app
+    volumes:
+      - ./:/var/www
+      - composer_cache:/home/.sammy/.composer
+    environment:
+      APP_ENV: local
+      CONTAINER_ROLE: queue
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      QUEUE_DRIVER: redis
+      REDIS_HOST: redis
+
+  redis:
+    container_name: travellist-redis
+    image: redis:4-alpine
+    ports:
+      - 16379:6379
+
+  db:
+    image: mysql:5.7
+    container_name: travellist-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: travellist
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
+      MYSQL_USER: user
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - travellist
+
+  nginx:
+    image: nginx:alpine
+    container_name: travellist-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+    networks:
+      - travellist
+
+networks:
+  travellist:
+    driver: bridge
+volumes:
+  composer_cache:
