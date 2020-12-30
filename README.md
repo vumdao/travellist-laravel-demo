@@ -3,7 +3,7 @@
     <img alt="Running the Laravel Scheduler and Queue with Docker" src="https://dev-to-uploads.s3.amazonaws.com/i/12zmbwwtwdvyx6wu6vu3.png" width="500" />
   </a>
 </p>
-<h1 align="left">
+<h1 align="center">
   Running the Laravel Scheduler and Queue with Docker
 </h1>
 
