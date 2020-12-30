@@ -7,7 +7,9 @@
   Running the Laravel Scheduler and Queue with Docker
 </h1>
 
-![Alt Text](https://dev-to-uploads.s3.amazonaws.com/i/xfp1y165hbygvgxqgvqj.png)
+<h1 align="center">
+  <img src="https://dev-to-uploads.s3.amazonaws.com/i/xfp1y165hbygvgxqgvqj.png" />
+</h1>
 
 ### 🚀 **[Get application code](#-Get-application-code)**
 ```
