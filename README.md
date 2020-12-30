@@ -11,6 +11,16 @@
   <img src="https://dev-to-uploads.s3.amazonaws.com/i/xfp1y165hbygvgxqgvqj.png" />
 </h1>
 
+## What’s In This Document 
+- [Get application code](#-Get-application-code)
+- [Setting Up the Application’s Dockerfile](#-Setting-Up-the-Application’s-Dockerfile)
+- [Create MySQL initialization files in order to init database at startup](#-Create-MySQL-initialization-files-in-order-to-init-database-at-startup)
+- [Setting Up the Application’s .env File](#-Setting-Up-the-Application’s-`.env`-File)
+- [Create docker-compose.yaml with support all three roles](#-Create-`docker-compose.yaml`-with-support-all-three-roles)
+- [Run composer install to install the application dependencies](#-Run-composer-install-to-install-the-application-dependencies)
+- [Check http://localhost:8000](#-Check-http://localhost:8000)
+
+
 ### 🚀 **[Get application code](#-Get-application-code)**
 ```
 https://github.com/vumdao/travellist-laravel-demo
